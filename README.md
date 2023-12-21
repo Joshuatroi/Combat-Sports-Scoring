@@ -66,10 +66,7 @@ namespace Combat_Sports
             return write;
         }
         public List<Fighters> DeleteRow(int RowToDelete, string fileName, string sport, int rowCount)
-        {
-
-            Console.WriteLine("rowCount : " + rowCount);
-
+        {   
             List<Fighters> res = new List<Fighters>();
            string[] newtxt = new string[rowCount - 1];
             using (var reader = new StreamReader(fileName))
@@ -107,8 +104,6 @@ namespace Combat_Sports
         }
         public List<Fighters> AddRow(string Name, int weight, string fileName, string sport, int rowCount)
         {
-
-            Console.WriteLine("rowCount : " + rowCount);
 
             List<Fighters> res = new List<Fighters>();
             string[] newtxt = new string[rowCount + 1];
@@ -494,11 +489,6 @@ namespace Combat_Sports
                             tableChoice = char.ToUpper(Console.ReadKey().KeyChar);                         
                             if (tableChoice == 'D')
                             {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.Yellow;
-                                Console.WriteLine("Current Data Table:");                              
-                                List<Fighters> currentData = a.ReadFromFile(file, selectedSport.GetName());
-                                Console.ResetColor();
                                 int RowToDelete = 0;                                                             
                                 do
                                 {
@@ -506,10 +496,11 @@ namespace Combat_Sports
                                     Console.Write("The number of row to be removed: ");
                                     Console.ResetColor();
                                     string rowDel = Console.ReadLine();
+                                    Console.Clear();
                                     try
                                     {
                                         RowToDelete = int.Parse(rowDel);
-                                        Console.WriteLine();
+                                        Console.WriteLine();                                      
                                     }
                                     catch (FormatException)
                                     {
@@ -518,7 +509,8 @@ namespace Combat_Sports
                                 } while (RowToDelete == 0);
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                                 fighters = a.DeleteRow(RowToDelete, file, selectedSport.GetName(), fighters.Count);
-                                Console.ResetColor();
+                                Console.ResetColor();                               
+                                Console.Clear();
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("[A]{Do you want to add a fighter?}\n[D]{Do you want to remove a fighter}\n[N]{None}");
                                 Console.ResetColor();
@@ -1104,6 +1096,10 @@ namespace Combat_Sports
             }
             return result;
         }
+
+    }
+
+}
 
     }
 
